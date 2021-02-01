@@ -35,4 +35,4 @@ def posts_by_film():
 
 
 if __name__ == '__main__':
-    print('test git')
+    pass
