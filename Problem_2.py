@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
+# firstly run the
 def get_film_posts():
     msg = pd.read_csv('MergedPosts.csv')
     msg = msg.iloc[:, [1, -1]]
