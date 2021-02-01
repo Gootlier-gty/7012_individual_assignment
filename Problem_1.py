@@ -16,12 +16,15 @@ def plot_rank_freq(words_df, title=None):
 
 
 if __name__ == '__main__':
+    stop_words = pd.read_csv('stop_words.txt', header=None)[0].tolist()
     posts_data = pd.read_csv('FBPosts.csv', encoding='utf-8')
     msgSeries = get_all_msg(posts_data)
     fullMsg = merge_msg(msgSeries)
-    msg_noStopWords = clean_eng_text(fullMsg)
+    msg_noStopWords = clean_eng_text(fullMsg,stop_words=stop_words)
     msg_withStopWords = clean_eng_text(fullMsg, rm_stpwds=False)
     wordsCnt_noStop = words_count(msg_noStopWords)
     wordsCnt_withStop = words_count(msg_withStopWords)
     plot_rank_freq(wordsCnt_noStop, 'No Stop Words')
     plot_rank_freq(wordsCnt_withStop, 'With Stop Words')
+    print(wordsCnt_withStop.head())
+    print(wordsCnt_noStop.head())

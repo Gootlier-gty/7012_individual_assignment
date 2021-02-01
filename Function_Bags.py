@@ -20,7 +20,7 @@ def merge_msg(msg_series):
     return message  # str
 
 
-def clean_eng_text(text, rm_stpwds=True, rm_noEng=True, stop_words = False):
+def clean_eng_text(text, rm_stpwds=True, rm_noEng=True, stop_words=False):
     text = text.lower().split(sep=' ')
     text = pd.Series(text)
     if rm_stpwds:
@@ -52,7 +52,6 @@ def lemmatization(text):
     return text
 
 
-
 def words_count(words_list):
     cnt = Counter()
     for word in words_list:
@@ -63,4 +62,3 @@ def words_count(words_list):
                                 'num': num})
     words_count.sort_values(by='num', ascending=False, inplace=True)
     return words_count.reset_index().iloc[:, 1:].reset_index()
-
