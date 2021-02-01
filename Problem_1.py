@@ -11,6 +11,7 @@ def plot_rank_freq(words_df, title=None):
     plt.xlabel('Rank')
     plt.ylabel('Frequency')
     plt.title(title)
+    plt.savefig('./p1_figures/'+title)
     plt.show()
 
 

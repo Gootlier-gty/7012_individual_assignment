@@ -1,6 +1,7 @@
 import pandas as pd
 from collections import Counter
 import numpy as np
+import spacy
 
 
 def get_all_msg(posts_data):
@@ -19,10 +20,9 @@ def merge_msg(msg_series):
     return message  # str
 
 
-def clean_eng_text(text, rm_stpwds=True, rm_noEng=True):
-    stop_words = pd.read_csv('stop_words.txt', header=None)[0].tolist()
+def clean_eng_text(text, rm_stpwds=True, rm_noEng=True, stop_words = False):
     text = text.lower().split(sep=' ')
-    text = pd.DataFrame(text)[0]
+    text = pd.Series(text)
     if rm_stpwds:
         # remove stop words
         text = text[-text.isin(stop_words)].reset_index().iloc[:, -1]
@@ -40,7 +40,17 @@ def clean_eng_text(text, rm_stpwds=True, rm_noEng=True):
         text = text[-text.isin(stop_words)].reset_index().iloc[:, -1]
     # remove empty value
     text = text[-text.isin([' ', '', None, np.nan])].reset_index().iloc[:, -1]
-    return text.tolist()
+    text = text.to_list()
+    return text
+
+
+def lemmatization(text):
+    # python -m spacy download en_core_web_sm 下载数据模型
+    nlp = spacy.load("en_core_web_sm")
+    nlp_text = nlp(text)
+    text = ' '.join([word.lemma_ if word.lemma_ != '-PRON-' else word.text for word in nlp_text])
+    return text
+
 
 
 def words_count(words_list):
@@ -53,3 +63,4 @@ def words_count(words_list):
                                 'num': num})
     words_count.sort_values(by='num', ascending=False, inplace=True)
     return words_count.reset_index().iloc[:, 1:].reset_index()
+
