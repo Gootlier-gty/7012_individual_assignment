@@ -16,15 +16,15 @@ def plot_rank_freq(words_df, title=None):
 
 
 if __name__ == '__main__':
-    stop_words = pd.read_csv('stop_words.txt', header=None)[0].tolist()
-    posts_data = pd.read_csv('FBPosts.csv', encoding='utf-8')
-    msgSeries = get_all_msg(posts_data)
-    fullMsg = merge_msg(msgSeries)
-    msg_noStopWords = clean_eng_text(fullMsg,stop_words=stop_words)
-    msg_withStopWords = clean_eng_text(fullMsg, rm_stpwds=False)
-    wordsCnt_noStop = words_count(msg_noStopWords)
-    wordsCnt_withStop = words_count(msg_withStopWords)
-    plot_rank_freq(wordsCnt_noStop, 'No Stop Words')
-    plot_rank_freq(wordsCnt_withStop, 'With Stop Words')
-    print(wordsCnt_withStop.head())
-    print(wordsCnt_noStop.head())
+    words_series_nostp = pd.read_csv('MergedPosts_nostp.csv')['lemma']
+    words_list_nostp = merge_msg(words_series_nostp).split(sep=' ')
+    words_series_withstp = pd.read_csv('MergedPosts_withstp.csv')['lemma']
+    words_list_withstp = merge_msg(words_series_withstp).split(sep=' ')
+    words_nostp_count = words_count(words_list_nostp)
+    words_withstp_count = words_count(words_list_withstp)
+    print(words_nostp_count.head(10))
+    print(words_withstp_count.head(10))
+    plot_rank_freq(words_withstp_count, 'with stop words')
+    plot_rank_freq(words_nostp_count, 'no stop words')
+
+

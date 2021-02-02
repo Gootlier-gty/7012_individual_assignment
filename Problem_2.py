@@ -5,7 +5,7 @@ import wordcloud
 
 
 def get_film_posts():
-    msg = pd.read_csv('MergedPosts.csv')
+    msg = pd.read_csv('MergedPosts_nostp.csv')
     msg = msg.iloc[:, [1, -1]]
     return msg  # dataframe
 
@@ -35,7 +35,7 @@ def get_15words(imdb_id):
 
 
 def word_cloud(word_str, film_name):
-    w = wordcloud.WordCloud(background_color='white', width=1000, height=500, margin=0, max_font_size=100, scale=20)
+    w = wordcloud.WordCloud(background_color='white', width=1000, height=500, margin=0, max_font_size=100, scale=20, normalize_plurals=False)
     w.generate(word_str)
     w.to_file('./p2_figures/' + film_name + '.png')
 
