@@ -19,7 +19,7 @@ def posts_by_film():
         lemma_posts.append(lemmatization(postSeries[i]))
     msg_dataframe['lemma'] = lemma_posts
     msg_dataframe.to_csv('MergedPosts.csv')
-    print(msg_dataframe)
+    return msg_dataframe
 
 
 if __name__ == '__main__':

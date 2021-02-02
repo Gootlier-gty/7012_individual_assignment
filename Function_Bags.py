@@ -62,3 +62,5 @@ def words_count(words_list):
                                 'num': num})
     words_count.sort_values(by='num', ascending=False, inplace=True)
     return words_count.reset_index().iloc[:, 1:].reset_index()
+
+
