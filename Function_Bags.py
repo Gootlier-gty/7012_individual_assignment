@@ -1,7 +1,8 @@
 import pandas as pd
-from collections import Counter
+from collections import Counter, defaultdict
 import numpy as np
 import spacy
+from operator import itemgetter
 
 
 def get_all_msg(posts_data):
@@ -64,3 +65,18 @@ def words_count(words_list):
     return words_count.reset_index().iloc[:, 1:].reset_index()
 
 
+def rm_s_longwords(long_words):
+    def rm_s_word(words):
+        if words.endswith('s') and not words.endswith('ss') and not words.endswith('hes') and not words.endswith('ses'):
+            words = words[:-1]
+        elif words.endswith('hes') or words.endswith('ses'):
+            words = words[:-2]
+        return words
+
+    words_series = pd.Series(long_words.split(sep=' '))
+    words_series = words_series.apply(lambda x: rm_s_word(x))
+    return ' '.join(words_series)
+
+
+if __name__ == '__main__':
+    pass

@@ -6,7 +6,6 @@ import wordcloud
 
 def get_film_posts():
     msg = pd.read_csv('MergedPosts_nostp.csv')
-    msg = msg.iloc[:, [1, -1]]
     return msg  # dataframe
 
 

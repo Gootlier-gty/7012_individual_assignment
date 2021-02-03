@@ -20,6 +20,7 @@ def posts_by_film_nostp():
     msg_dataframe.to_csv('MergedPosts_nostp.csv')
     return msg_dataframe
 
+
 def posts_by_film_withstp():
     stop_words = pd.read_csv('stop_words.txt', header=None)[0].tolist()
     posts_data = pd.read_csv('FBPosts.csv', encoding='utf-8')
@@ -40,6 +41,18 @@ def posts_by_film_withstp():
     return msg_dataframe
 
 
+def rm_words_s():
+    posts_nostp = pd.read_csv('MergedPosts_nostp.csv')
+    posts_withstp = pd.read_csv('MergedPosts_withstp.csv')
+    posts_nostp['lemma'] = posts_nostp['lemma'].apply(lambda x: rm_s_longwords(x))
+    posts_withstp['lemma'] = posts_withstp['lemma'].apply(lambda x: rm_s_longwords(x))
+    posts_withstp = posts_withstp.loc[:,['imdb_id','lemma']]
+    posts_nostp = posts_nostp.loc[:,['imdb_id','lemma']]
+    posts_nostp.to_csv('MergedPosts_nostp.csv')
+    posts_withstp.to_csv('MergedPosts_withstp.csv')
+
+
 if __name__ == '__main__':
-    posts_by_film_nostp()
-    posts_by_film_withstp()
+    # posts_by_film_nostp()
+    # posts_by_film_withstp()
+    rm_words_s()
