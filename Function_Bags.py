@@ -1,8 +1,7 @@
 import pandas as pd
-from collections import Counter, defaultdict
+from collections import Counter
 import numpy as np
 import spacy
-from operator import itemgetter
 
 
 def get_all_msg(posts_data):

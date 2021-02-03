@@ -53,6 +53,6 @@ def rm_words_s():
 
 
 if __name__ == '__main__':
-    # posts_by_film_nostp()
-    # posts_by_film_withstp()
+    posts_by_film_nostp()
+    posts_by_film_withstp()
     rm_words_s()

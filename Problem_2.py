@@ -1,4 +1,3 @@
-import pandas as pd
 from Function_Bags import *
 from sklearn.feature_extraction.text import TfidfVectorizer
 import wordcloud
