@@ -1,4 +1,4 @@
-from Function_Bags import get_all_msg, merge_msg, clean_eng_text, words_count
+from Function_Bags import *
 import matplotlib.pyplot as plt
 import pandas as pd
 
